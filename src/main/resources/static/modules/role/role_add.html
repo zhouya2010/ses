@@ -1,0 +1,47 @@
+<form id="addRoleForm" data-options="title: '添加菜单',
+      iconCls:'fa fa-key',">
+
+    <table class="editTable">
+        <tr>
+            <td class="label">角色名称</td>
+            <td colspan="3">
+                <input type="text" name="name" id="newName" data-toggle="topjui-textbox"
+                       data-options="required:true,width:450">
+            </td>
+        </tr>
+
+        <tr>
+            <td class="label">所属服务商</td>
+            <td>
+                <input type="text" name="instId" id="newInstId"
+                       data-toggle="topjui-combobox"
+                       data-options="
+                       required:true,
+                       data:[
+                       {
+                           text: '公有角色',
+                           value: ''
+                       },
+                       {
+                           text: '运营商',
+                           value: '000000000000'
+                       },
+                       {
+                           text: '服务商1',
+                           value: '000100000000'
+                       }
+                   ]">
+            </td>
+        </tr>
+
+        <tr>
+            <td class="label">备注信息</td>
+            <td colspan="3">
+                <input type="text" name="remark" id="newRemark" data-toggle="topjui-textbox"
+                       data-options="width:450">
+            </td>
+        </tr>
+
+    </table>
+</form>
+

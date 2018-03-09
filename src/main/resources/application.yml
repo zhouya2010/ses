@@ -1,0 +1,44 @@
+spring:
+  application:
+    name: ses
+  profiles:
+    active: @profileActive@
+
+  mvc:
+    view:
+      prefix: /
+      suffix: .html
+    favicon:
+      enabled: true
+
+  http:
+    encoding:
+      charset: utf-8
+  resources:
+    static-locations: classpath:/static/
+
+
+mybatis:
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  configuration:
+      map-underscore-to-camel-case: true
+      default-fetch-size: 50
+      default-statement-timeout: 10
+      auto-mapping-unknown-column-behavior: WARNING
+      use-generated-keys: true
+      key-generator-names: id
+  type-handlers-package: com.example.ses.domain.enums
+
+#mapper:
+#    mappers:
+#        - tk.mybatis.springboot.util.MyMapper
+#    not-empty: false
+#    identity: MYSQL
+
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
+
+

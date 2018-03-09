@@ -1,0 +1,58 @@
+spring:
+  profiles:
+    active: prod
+
+  devtools:
+    restart:
+      enabled: true
+    livereload:
+        enabled: true
+
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    serialization.write_dates_as_timestamps: false
+    default-property-inclusion: non_null
+
+  mvc:
+    view:
+      prefix: /
+      suffix: .html
+
+  http:
+    encoding:
+      charset: utf-8
+  resources:
+    static-locations: classpath:/static/
+
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/sas_db?useUnicode=true&characterEncoding=utf-8
+    username: test
+    password: 123456
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+      map-underscore-to-camel-case: true
+      default-fetch-size: 50
+      default-statement-timeout: 10
+      auto-mapping-unknown-column-behavior: WARNING
+      use-generated-keys: true
+      key-generator-names: id
+  type-handlers-package: com.example.ses.entity.enums
+
+#mapper:
+#    mappers:
+#        - tk.mybatis.springboot.util.MyMapper
+#    not-empty: false
+#    identity: MYSQL
+
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
+
+
+server:
+  port: 8082

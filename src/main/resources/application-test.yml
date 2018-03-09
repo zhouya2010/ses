@@ -1,0 +1,45 @@
+spring:
+  profiles:
+    active: dev
+
+  devtools:
+    restart:
+      enabled: true
+    livereload:
+        enabled: true
+
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/sas_db?useUnicode=true&characterEncoding=utf-8
+    username: test
+    password: 123456
+
+
+server:
+  port: 8081
+
+debug: true
+
+logging:
+  level:
+    root: debug
+
+
+ses:
+  security:
+    authentication:
+      jwt:
+        secret: my-secret-token-to-change-in-production
+        # Token is valid 24 hours
+        token-validity-in-seconds: 86400
+        token-validity-in-seconds-for-remember-me: 2592000
+  cors:
+    allowed-origins: "*"
+    allowed-methods: GET, PUT, POST, DELETE, OPTIONS
+    allowed-headers: "*"
+    exposed-headers:
+    allow-credentials: true
+    max-age: 1800
+
+
+

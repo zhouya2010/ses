@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.ses.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.example.ses.domain.User" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="telephone" property="telephone" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="belong_type" property="belongType" jdbcType="TINYINT" typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler"/>
+    <result column="belong_id" property="belongId" jdbcType="BIGINT" />
+    <result column="name_cn" property="nameCn" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler"/>
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="created_by" property="createdBy" jdbcType="VARCHAR" />
+    <result column="last_modified_by" property="lastModifiedBy" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="DATE" />
+    <result column="last_modified_date" property="lastModifiedDate" jdbcType="DATE" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    id, user_name, telephone, email, password, belong_type, belong_id, name_cn, status, 
+    nickname, created_by, last_modified_by, create_date, last_modified_date
+  </sql>
+
+  <sql id="Simple_Column_List" >
+    id, user_name, telephone, email, belong_type, belong_id, name_cn, status,
+    nickname, created_by, last_modified_by, create_date, last_modified_date
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from sas_user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectByUsername" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Simple_Column_List" />
+    from sas_user
+    where user_name = #{username,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sas_user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insertUserRole">
+    insert into sas_user_role(user_id, role_id) VALUE (#{userId,jdbcType=BIGINT},#{roleId,jdbcType=BIGINT})
+  </insert>
+
+  <insert id="insert" parameterType="com.example.ses.domain.User" keyProperty="id" useGeneratedKeys="true">
+    insert into sas_user (id, user_name, telephone, 
+      email, password, belong_type, 
+      belong_id, name_cn, status, 
+      nickname, created_by, last_modified_by, 
+      create_date, last_modified_date)
+    values (#{id,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{belongType,typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler},
+      #{belongId,jdbcType=BIGINT}, #{nameCn,jdbcType=VARCHAR}, #{status,typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler},
+      #{nickname,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, #{lastModifiedBy,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=DATE}, #{lastModifiedDate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.ses.domain.User" useGeneratedKeys="true" keyProperty="id">
+    insert into sas_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="telephone != null" >
+        telephone,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="belongType != null" >
+        belong_type,
+      </if>
+      <if test="belongId != null" >
+        belong_id,
+      </if>
+      <if test="nameCn != null" >
+        name_cn,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="nickname != null" >
+        nickname,
+      </if>
+      <if test="createdBy != null" >
+        created_by,
+      </if>
+      <if test="lastModifiedBy != null" >
+        last_modified_by,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="lastModifiedDate != null" >
+        last_modified_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="belongType != null" >
+        #{belongType,typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler},
+      </if>
+      <if test="belongId != null" >
+        #{belongId,jdbcType=BIGINT},
+      </if>
+      <if test="nameCn != null" >
+        #{nameCn,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler},
+      </if>
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifiedBy != null" >
+        #{lastModifiedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=DATE},
+      </if>
+      <if test="lastModifiedDate != null" >
+        #{lastModifiedDate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.ses.domain.User" >
+    update sas_user
+    <set >
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="belongType != null" >
+        belong_type = #{belongType,typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler},
+      </if>
+      <if test="belongId != null" >
+        belong_id = #{belongId,jdbcType=BIGINT},
+      </if>
+      <if test="nameCn != null" >
+        name_cn = #{nameCn,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler},
+      </if>
+      <if test="nickname != null" >
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null" >
+        created_by = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifiedBy != null" >
+        last_modified_by = #{lastModifiedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=DATE},
+      </if>
+      <if test="lastModifiedDate != null" >
+        last_modified_date = #{lastModifiedDate,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.ses.domain.User" >
+    update sas_user
+    set user_name = #{userName,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      belong_type = #{belongType,typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler},
+      belong_id = #{belongId,jdbcType=BIGINT},
+      name_cn = #{nameCn,jdbcType=VARCHAR},
+      status = #{status,typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      created_by = #{createdBy,jdbcType=VARCHAR},
+      last_modified_by = #{lastModifiedBy,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=DATE},
+      last_modified_date = #{lastModifiedDate,jdbcType=DATE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+  <select id="selectWithAuthoritiesByLogin" resultMap="BaseResultMap">
+    select
+    user_name, password, belong_type
+    from sas_user
+    where  user_name = #{lowercaseLogin,jdbcType=VARCHAR}
+  </select>
+
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Simple_Column_List"/>
+    from sas_user
+    <where>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+</mapper>

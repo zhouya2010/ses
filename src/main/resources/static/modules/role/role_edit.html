@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <!-- 避免IE使用兼容模式 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="renderer" content="webkit">
+    <!-- TopJUI框架样式 -->
+    <link type="text/css" href="../../topjui/css/topjui.core.min.css" rel="stylesheet">
+    <link type="text/css" href="../../topjui/themes/default/topjui.blue.css" rel="stylesheet" id="dynamicTheme"/>
+    <!-- FontAwesome字体图标 -->
+    <link type="text/css" href="../../plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+    <!-- jQuery相关引用 -->
+    <script type="text/javascript" src="../../plugins/jquery/jquery.min.js"></script>
+    <!-- TopJUI框架配置 -->
+    <script type="text/javascript" src="../../public/js/topjui.config.js"></script>
+    <!-- TopJUI框架核心 -->
+    <script type="text/javascript" src="../../topjui/js/topjui.core.min.js"></script>
+    <!-- TopJUI中文支持 -->
+    <script type="text/javascript" src="../../topjui/js/locale/topjui.lang.zh_CN.js"></script>
+    <script type="text/javascript" src="../../public/js/ses.common.js"></script>
+    <script type="text/javascript" src="../../plugins/jquery.serializejson.min.js"></script>
+    <script type="text/javascript" src="./role_edit.js" charset="utf-8"></script>
+</head>
+<body>
+
+<div id="loading" class="loading-wrap">
+    <div class="loading-content">
+        <div class="loading-round"></div>
+        <div class="loading-dot"></div>
+    </div>
+</div>
+
+<form id="editRoleForm" data-options="title: '添加菜单',
+      iconCls:'fa fa-key',">
+
+    <input type="text" name="id" id="id" hidden="hidden">
+
+    <table class="editTable">
+        <tr>
+            <td class="label">角色名称</td>
+            <td colspan="3">
+                <input type="text" name="name" id="name" data-toggle="topjui-textbox"
+                       data-options="required:true,width:450">
+            </td>
+        </tr>
+
+        <tr>
+            <td class="label">所属服务商</td>
+            <td>
+                <input type="text" name="instId" id="instId"
+                       data-toggle="topjui-combobox"
+                       data-options="
+                       required:true,
+                       data:[
+                       {
+                           text: '公有角色',
+                           value: ''
+                       },
+                       {
+                           text: '运营商',
+                           value: '000000000000'
+                       },
+                       {
+                           text: '服务商1',
+                           value: '000100000000'
+                       }
+                   ]">
+            </td>
+        </tr>
+
+        <tr>
+            <td class="label">备注信息</td>
+            <td colspan="3">
+                <input type="text" name="remark" id="remark" data-toggle="topjui-textbox"
+                       data-options="width:450">
+            </td>
+        </tr>
+
+        <tr>
+            <td class="label"></td>
+            <td colspan="2">
+                <button id="confirm">保存</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="cancel">取消</button>
+            </td>
+        </tr>
+
+    </table>
+</form>
+
+</body>
+</html>
+
+
+
+
+
+

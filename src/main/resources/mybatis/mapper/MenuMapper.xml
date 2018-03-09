@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.ses.mapper.MenuMapper">
+    <resultMap id="BaseResultMap" type="com.example.ses.domain.Menu">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="url" property="url" jdbcType="VARCHAR"/>
+        <result column="method" property="method" jdbcType="VARCHAR"/>
+        <result column="icon" property="icon" jdbcType="VARCHAR"/>
+        <result column="pid" property="pid" jdbcType="BIGINT"/>
+        <result column="menu_order" property="order" jdbcType="TINYINT"/>
+        <result column="level" property="level" jdbcType="TINYINT"/>
+        <result column="addable" property="addable" jdbcType="TINYINT"/>
+        <result column="editable" property="editable" jdbcType="TINYINT"/>
+        <result column="deletable" property="deletable" jdbcType="TINYINT"/>
+        <result column="selectable" property="selectable" jdbcType="TINYINT"/>
+        <result column="exportable" property="exportable" jdbcType="TINYINT"/>
+        <result column="auditable" property="auditable" jdbcType="TINYINT"/>
+    </resultMap>
+
+
+    <resultMap id="MenuTreeMap" type="com.example.ses.web.vm.MenuTreeVM">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="menu_id" property="menuId" jdbcType="BIGINT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="ref" property="ref" jdbcType="VARCHAR"/>
+        <result column="method" property="method" jdbcType="VARCHAR"/>
+        <result column="icon" property="icon" jdbcType="VARCHAR"/>
+        <result column="pid" property="pid" jdbcType="BIGINT"/>
+        <result column="menu_order" property="order" jdbcType="TINYINT"/>
+        <result column="level" property="level" jdbcType="TINYINT"/>
+        <result column="checked" property="checked" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    id, name, url, method, icon, pid, menu_order, level, addable, editable, deletable, 
+    selectable, exportable, auditable
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from sas_menu
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sas_menu
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.example.ses.domain.Menu">
+    insert into sas_menu (id, name, url, 
+      icon, pid, menu_order, method, level, addable, editable, deletable, 
+      selectable, exportable, auditable
+      )
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+      #{icon,jdbcType=VARCHAR}, #{pid,jdbcType=BIGINT}, #{order,jdbcType=TINYINT}, #{level,jdbcType=TINYINT},
+      #{addable,jdbcType=TINYINT}, #{editable,jdbcType=TINYINT}, #{deletable,jdbcType=TINYINT}, 
+      #{selectable,jdbcType=TINYINT}, #{exportable,jdbcType=TINYINT}, #{auditable,jdbcType=TINYINT}, 
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.example.ses.domain.Menu">
+        insert into sas_menu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                name,
+            </if>
+            <if test="url != null">
+                url,
+            </if>
+            <if test="method != null">
+                method,
+            </if>
+            <if test="icon != null">
+                icon,
+            </if>
+            <if test="pid != null">
+                pid,
+            </if>
+            <if test="order != null">
+                menu_order,
+            </if>
+            <if test="level != null">
+                level,
+            </if>
+            <if test="addable != null">
+                addable,
+            </if>
+            <if test="editable != null">
+                editable,
+            </if>
+            <if test="deletable != null">
+                deletable,
+            </if>
+            <if test="selectable != null">
+                selectable,
+            </if>
+            <if test="exportable != null">
+                exportable,
+            </if>
+            <if test="auditable != null">
+                auditable,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null">
+                #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="method != null">
+                #{method,jdbcType=VARCHAR},
+            </if>
+            <if test="icon != null">
+                #{icon,jdbcType=VARCHAR},
+            </if>
+            <if test="pid != null">
+                #{pid,jdbcType=BIGINT},
+            </if>
+            <if test="order != null">
+                #{order,jdbcType=TINYINT},
+            </if>
+            <if test="level != null">
+                #{level,jdbcType=TINYINT},
+            </if>
+            <if test="addable != null">
+                #{addable,jdbcType=TINYINT},
+            </if>
+            <if test="editable != null">
+                #{editable,jdbcType=TINYINT},
+            </if>
+            <if test="deletable != null">
+                #{deletable,jdbcType=TINYINT},
+            </if>
+            <if test="selectable != null">
+                #{selectable,jdbcType=TINYINT},
+            </if>
+            <if test="exportable != null">
+                #{exportable,jdbcType=TINYINT},
+            </if>
+            <if test="auditable != null">
+                #{auditable,jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.example.ses.domain.Menu">
+        update sas_menu
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null">
+                url = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="method != null">
+                method = #{method,jdbcType=VARCHAR},
+            </if>
+            <if test="icon != null">
+                icon = #{icon,jdbcType=VARCHAR},
+            </if>
+            <if test="pid != null">
+                pid = #{pid,jdbcType=BIGINT},
+            </if>
+            <if test="order != null">
+                menu_order = #{order,jdbcType=TINYINT},
+            </if>
+            <if test="level != null">
+                level = #{level,jdbcType=TINYINT},
+            </if>
+            <if test="addable != null">
+                addable = #{addable,jdbcType=TINYINT},
+            </if>
+            <if test="editable != null">
+                editable = #{editable,jdbcType=TINYINT},
+            </if>
+            <if test="deletable != null">
+                deletable = #{deletable,jdbcType=TINYINT},
+            </if>
+            <if test="selectable != null">
+                selectable = #{selectable,jdbcType=TINYINT},
+            </if>
+            <if test="exportable != null">
+                exportable = #{exportable,jdbcType=TINYINT},
+            </if>
+            <if test="auditable != null">
+                auditable = #{auditable,jdbcType=TINYINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.example.ses.domain.Menu">
+    update sas_menu
+    set name = #{name,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      method = #{method,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      pid = #{pid,jdbcType=BIGINT},
+      menu_order = #{order,jdbcType=TINYINT},
+      level = #{level,jdbcType=TINYINT},
+      addable = #{addable,jdbcType=TINYINT},
+      editable = #{editable,jdbcType=TINYINT},
+      deletable = #{deletable,jdbcType=TINYINT},
+      selectable = #{selectable,jdbcType=TINYINT},
+      exportable = #{exportable,jdbcType=TINYINT},
+      auditable = #{auditable,jdbcType=TINYINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectByRole" resultMap="BaseResultMap">
+        SELECT
+        id, name, url, method, icon, pid, menu_order, level
+        FROM sas_menu,
+        (SELECT DISTINCT(menu_id) from sas_role_menu WHERE role_id in
+        <foreach collection="list" item="roleId" index="index"
+                 open="(" close=")" separator=",">
+            #{roleId}
+        </foreach>
+        ) as ids
+        where id = ids.menu_id
+    </select>
+
+
+    <select id="selectByRoleId" resultMap="BaseResultMap">
+    SELECT
+    id, name, url, method, icon, pid, menu_order, level
+    FROM sas_menu,
+    (SELECT DISTINCT(menu_id) from sas_role_menu
+      WHERE role_id = #{roleId,jdbcType=BIGINT}
+    ) as ids
+    where id = ids.menu_id
+  </select>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM sas_menu
+        <where>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR}
+            </if>
+
+            <if test="level != null">
+                level = #{level,jdbcType=VARCHAR}
+            </if>
+
+            <if test="pid != null">
+                pid = #{pid,jdbcType=BIGINT}
+            </if>
+        </where>
+    </select>
+
+
+    <select id="selectOperator" resultMap="BaseResultMap">
+
+    SELECT
+      addable, editable, deletable,selectable, exportable, auditable
+    FROM sas_role_menu
+    where
+      menu_id = #{menuId,jdbcType=BIGINT}
+    and
+    role_id = #{roleId,jdbcType=BIGINT}
+  </select>
+
+
+    <select id="selectMenuAuthorize" resultMap="MenuTreeMap">
+      SELECT
+          t.menu_id ,
+          t.checked ,
+          m. NAME ,
+          m.pid ,
+          m.menu_order ,
+          m.url AS ref,
+          t.addable,
+          t.selectable,
+          t.deletable,
+          t.editable,
+          t.exportable,
+          t.auditable
+      FROM
+          (
+              SELECT
+                  r1.menu_id ,
+                  IF(r2.id IS NULL , FALSE , TRUE) AS checked,
+                  IF(r1.addable = 0, null, IF(r2.addable IS NULL ,FALSE,r1.addable and r2.addable)) as addable,
+                  IF(r1.selectable = 0, null, IF(r2.selectable IS NULL ,FALSE,r1.selectable and r2.selectable)) as selectable,
+                  IF(r1.deletable = 0, null, IF(r2.deletable IS NULL ,FALSE,r1.deletable and r2.deletable)) as deletable,
+                  IF(r1.editable = 0, null, IF(r2.editable IS NULL ,FALSE,r1.editable and r2.editable)) as editable,
+                  IF(r1.exportable = 0, null, IF(r2.exportable IS NULL ,FALSE,r1.exportable and r2.exportable)) as exportable,
+                  IF(r1.auditable = 0, null, IF(r2.auditable IS NULL ,FALSE,r1.auditable and r2.auditable)) as auditable
+              FROM
+                  (
+                      (
+                          SELECT
+                              id ,
+                              role_id ,
+                              menu_id,
+                              addable,
+                              selectable,
+                              deletable,
+                              editable,
+                              exportable,
+                              auditable
+                          FROM
+                              sas_role_menu m1
+                          WHERE
+                              m1.role_id = #{pid,jdbcType=BIGINT}
+
+                      ) AS r1
+                  )
+              LEFT JOIN(
+                  (
+                      SELECT
+                          id ,
+                          role_id ,
+                          menu_id,
+                          addable,
+                          selectable,
+                          deletable,
+                          editable,
+                          exportable,
+                          auditable
+                      FROM
+                          sas_role_menu m2
+                      WHERE
+                          m2.role_id = #{roleId,jdbcType=BIGINT}
+                  ) AS r2
+              ) ON r1.menu_id = r2.menu_id
+          ) AS t
+      LEFT JOIN sas_menu m ON t.menu_id = m.id
+      ORDER BY
+          pid ,
+          menu_order
+  </select>
+
+
+    <delete id="deleteRoleMenusByRoleId" parameterType="java.lang.Long">
+        delete from sas_role_menu
+        where role_id = #{roleId,jdbcType=BIGINT}
+    </delete>
+
+
+    <insert id="insertRoleMenu" parameterType="java.util.List">
+        insert into sas_role_menu (
+        role_id, menu_id, addable, editable, deletable,
+        selectable, exportable, auditable
+        )
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.roleId,jdbcType=BIGINT}, #{item.menuId,jdbcType=INTEGER},
+            #{item.addable,jdbcType=TINYINT}, #{item.editable,jdbcType=TINYINT}, #{item.deletable,jdbcType=TINYINT},
+            #{item.selectable,jdbcType=TINYINT}, #{item.exportable,jdbcType=TINYINT}, #{item.auditable,jdbcType=TINYINT})
+        </foreach>
+    </insert>
+</mapper>

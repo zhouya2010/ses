@@ -1,0 +1,134 @@
+<form id="addMenuForm" data-options="title: '添加菜单',
+      iconCls:'fa fa-key',">
+
+    <table class="editTable">
+        <tr>
+            <td class="label">菜单名称</td>
+            <td colspan="3">
+                <input type="text" name="name" id="newName" data-toggle="topjui-textbox"
+                       data-options="required:true,width:450">
+            </td>
+        </tr>
+
+        <tr>
+            <td class="label">访问路径</td>
+            <td colspan="3">
+                <input type="text" name="url" id="newUrl" data-toggle="topjui-textbox"
+                       data-options="width:450">
+            </td>
+        </tr>
+
+        <tr hidden="hidden">
+            <td class="label">方法</td>
+            <td colspan="3">
+                <input type="text" name="method" id="newMethod" value="GET" data-toggle="topjui-textbox"
+                       data-options="required:true,width:450">
+            </td>
+        </tr>
+
+        <tr>
+            <td class="label">菜单图片</td>
+            <td>
+                <input type="text" name="icon" id="newIcon" data-toggle="topjui-textbox">
+            </td>
+            <td class="label">菜单顺序</td>
+            <td>
+                <input type="text" name="order" id="newOrder"
+                       data-toggle="topjui-numberbox"
+                       data-options="min:1,required:true">
+            </td>
+        </tr>
+        <tr>
+            <td class="label">菜单级别</td>
+            <td>
+                <input type="text" name="level" id="newLevel"
+                       data-toggle="topjui-combobox"
+                       data-options="
+                       required:true,
+                       data:[
+                       {
+                           text: '一级菜单',
+                           value: '1'
+                       },
+                       {
+                           text: '二级菜单',
+                           value: '2'
+                       },
+                       {
+                           text: '三级菜单',
+                           value: '3'
+                       }
+                   ]">
+            </td>
+            <td class="label">上级菜单</td>
+            <td>
+                <input type="text" id="pidDg" name="pid" data-toggle="topjui-combobox">
+            </td>
+        </tr>
+        <tr>
+            <td class="label">操作：</td>
+            <td colspan="3">
+                <div data-toggle="topjui-checkbox">
+                    <input type="checkbox" name="addable" id="enwAddable" label="新增" checked="checked" value="true">
+
+                    <input type="checkbox" name="editable" id="newEditable" label="编辑" checked="checked" value="true">
+
+                    <input type="checkbox" name="selectable" id="newSelectable" label="详情" checked="checked"
+                           value="true">
+
+                    <input type="checkbox" name="deletable" id="newDeletable" label="删除" value="true">
+
+                    <input type="checkbox" name="exportable" id="newExportable" label="导出" value="true">
+
+                    <input type="checkbox" name="auditable" id="newAuditable" label="审核" value="true">
+                </div>
+            </td>
+        </tr>
+    </table>
+</form>
+
+<script>
+
+    $(function () {
+        getMenuTree();
+        function getMenuTree() {
+            var values = [];
+            var url = "/api/v1/menus/tree";
+            values.push({
+                text: '首页',
+                value: 0
+            });
+            $.get(
+                url,
+                function (data) {
+                    $.each(data, function (i, e) {
+                        values.push({
+                            text: e.name,
+                            value: e.id
+                        });
+
+                        var level2Menu = e.childMenu;
+                        $.parser.parse();
+
+                        if (level2Menu) {
+                            $.each(level2Menu, function (i, c) {
+                                values.push({
+                                    id: c.id,
+                                    text: c.name,
+                                    value: c.id
+                                });
+                            });
+                        }
+                    });
+
+                    $('#pidDg').iCombobox({
+                        data: values
+                    });
+
+
+                }, "json"
+            );
+        }
+
+    });
+</script>

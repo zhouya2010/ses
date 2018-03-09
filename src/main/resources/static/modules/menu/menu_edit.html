@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <!-- 避免IE使用兼容模式 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="renderer" content="webkit">
+    <!-- TopJUI框架样式 -->
+    <link type="text/css" href="../../topjui/css/topjui.core.min.css" rel="stylesheet">
+    <link type="text/css" href="../../topjui/themes/default/topjui.blue.css" rel="stylesheet" id="dynamicTheme"/>
+    <!-- FontAwesome字体图标 -->
+    <link type="text/css" href="../../plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+    <!-- jQuery相关引用 -->
+    <script type="text/javascript" src="../../plugins/jquery/jquery.min.js"></script>
+    <!-- TopJUI框架配置 -->
+    <script type="text/javascript" src="../../public/js/topjui.config.js"></script>
+    <!-- TopJUI框架核心 -->
+    <script type="text/javascript" src="../../topjui/js/topjui.core.min.js"></script>
+    <!-- TopJUI中文支持 -->
+    <script type="text/javascript" src="../../topjui/js/locale/topjui.lang.zh_CN.js"></script>
+    <script type="text/javascript" src="../../public/js/ses.common.js"></script>
+    <script type="text/javascript" src="../../plugins/jquery.serializejson.min.js"></script>
+    <script type="text/javascript" src="./menu_edit.js" charset="utf-8"></script>
+</head>
+<body>
+
+<div id="loading" class="loading-wrap">
+    <div class="loading-content">
+        <div class="loading-round"></div>
+        <div class="loading-dot"></div>
+    </div>
+</div>
+
+<form id="editMenuForm" data-options="title: '添加菜单',
+      iconCls:'fa fa-key',">
+
+    <input type="text" name="id" id="id" hidden="hidden">
+
+    <table class="editTable">
+        <tr>
+            <td class="label">菜单名称</td>
+            <td colspan="3">
+                <input type="text" name="name" id="newName" data-toggle="topjui-textbox"
+                       data-options="required:true,width:450">
+            </td>
+        </tr>
+
+        <tr>
+            <td class="label">访问路径</td>
+            <td colspan="3">
+                <input type="text" name="url" id="newUrl" data-toggle="topjui-textbox"
+                       data-options="width:450">
+            </td>
+        </tr>
+
+        <tr hidden="hidden">
+            <td class="label">方法</td>
+            <td colspan="3">
+                <input type="text" name="method" id="newMethod" value="GET" data-toggle="topjui-textbox"
+                       data-options="required:true,width:450">
+            </td>
+        </tr>
+
+        <tr>
+            <td class="label">菜单图片</td>
+            <td>
+                <input type="text" name="icon" id="newIcon" data-toggle="topjui-textbox">
+            </td>
+            <td class="label">菜单顺序</td>
+            <td>
+                <input type="text" name="order" id="newOrder"
+                       data-toggle="topjui-numberbox"
+                       data-options="min:1,required:true">
+            </td>
+        </tr>
+        <tr>
+            <td class="label">菜单级别</td>
+            <td>
+                <input type="text" name="level" id="newLevel"
+                       data-toggle="topjui-combobox"
+                       data-options="
+                       required:true,
+                       valueField: 'value',
+                       textField: 'text',
+                       data:[
+                       {
+                           text: '一级菜单',
+                           value: '1'
+                       },
+                       {
+                           text: '二级菜单',
+                           value: '2'
+                       },
+                       {
+                           text: '三级菜单',
+                           value: '3'
+                       }
+                   ]">
+            </td>
+            <td class="label">上级菜单</td>
+            <td>
+                <input type="text" id="pidDg" name="pid" data-toggle="topjui-combobox">
+            </td>
+        </tr>
+        <tr>
+            <td class="label">操作：</td>
+            <td colspan="3">
+                <div>
+                    <label>新增</label>
+                    <input type="checkbox" name="addable" id="newAddable" value="true">
+
+                    &nbsp;&nbsp;&nbsp;
+                    <label>编辑</label>
+                    <input type="checkbox" name="editable" id="newEditable" value="true">
+
+                    &nbsp;&nbsp;&nbsp;
+                    <label>详情</label>
+                    <input type="checkbox" name="selectable" id="newSelectable" value="true">
+
+                    &nbsp;&nbsp;&nbsp;
+                    <label>删除</label>
+                    <input type="checkbox" name="deletable" id="newDeletable" value="true">
+
+                    &nbsp;&nbsp;&nbsp;
+                    <label>导出</label>
+                    <input type="checkbox" name="exportable" id="newExportable" value="true">
+
+                    &nbsp;&nbsp;&nbsp;
+                    <label>审核</label>
+                    <input type="checkbox" name="auditable" id="newAuditable" value="true">
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="label"></td>
+            <td colspan="2">
+                <button id="confirm">保存</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="cancel">取消</button>
+            </td>
+        </tr>
+    </table>
+</form>
+
+</body>
+</html>
+
+
+
+
+
+
