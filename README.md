@@ -7,7 +7,7 @@
 
 * 基于 JWT 实现前后分离,Spring Security 安全控制
 
-* 前端采用 [topjui](https://www.topjui.com/)（基于 easyui 的美化框架 ）
+* 前端采用 [topjui](https://www.topjui.com/?_blank)（基于 easyui 的美化框架 ）
 
 * 实现了三级动态菜单、页面按钮动态授权功能
 
